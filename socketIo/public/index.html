@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Chat App</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f3f4f6;
+    }
+    #messages {
+      max-height: calc(100vh - 180px);
+    }
+    .message {
+      max-width: 70%;
+    }
+    .sent {
+      align-self: flex-start;
+      background-color: #e2e8f0;
+    }
+    .received {
+      align-self: flex-end;
+      background-color: #3b82f6;
+      color: white;
+    }
+    .notification {
+      align-self: center;
+      background-color: #f59e0b;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body class="flex flex-col h-screen justify-between">
+  <div id="usernamePrompt" class="flex items-center justify-center h-screen">
+    <div class="bg-white p-4 rounded-lg shadow-lg">
+      <h2 class="text-xl mb-4">Enter your name</h2>
+      <input id="usernameInput" type="text" class="border p-2 rounded-lg w-full" placeholder="Your name...">
+      <button id="setUsernameButton" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Join Chat</button>
+    </div>
+  </div>
+
+  <div id="chatContainer" class="flex flex-col h-screen justify-between hidden">
+    <div class="flex flex-col flex-grow p-4 overflow-hidden">
+      <ul id="messages" class="flex flex-col space-y-2 overflow-y-auto mb-4"></ul>
+      <form id="form" action="" class="flex">
+        <input id="input" autocomplete="off" placeholder="Type a message..." class="flex-grow px-4 py-2 border border-gray-300 rounded-l-lg" />
+        <button class="px-4 py-2 bg-blue-500 text-white rounded-r-lg hover:bg-blue-600">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    const usernamePrompt = document.getElementById('usernamePrompt');
+    const chatContainer = document.getElementById('chatContainer');
+    const usernameInput = document.getElementById('usernameInput');
+    const setUsernameButton = document.getElementById('setUsernameButton');
+    const form = document.getElementById('form');
+    const input = document.getElementById('input');
+    const messages = document.getElementById('messages');
+
+    setUsernameButton.addEventListener('click', () => {
+      const username = usernameInput.value.trim();
+      if (username) {
+        socket.emit('set username', username);
+        usernamePrompt.classList.add('hidden');
+        chatContainer.classList.remove('hidden');
+      }
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (input.value) {
+        socket.emit('chat message', input.value);
+        input.value = '';
+      }
+    });
+
+    socket.on('chat message', (data) => {
+      appendMessage(`${data.name}: ${data.msg}`, data.type);
+    });
+
+    socket.on('user joined', (message) => {
+      showNotification(message);
+    });
+
+    socket.on('user left', (message) => {
+      showNotification(message);
+    });
+
+    function appendMessage(message, type) {
+      const item = document.createElement('li');
+      item.textContent = message;
+      item.classList.add('p-2', 'border', 'rounded-lg', 'shadow-sm', 'message');
+      if (type === 'sent') {
+        item.classList.add('sent');
+      } else {
+        item.classList.add('received');
+      }
+      messages.appendChild(item);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function showNotification(message) {
+      const notification = document.createElement('li');
+      notification.textContent = message;
+      notification.classList.add('notification');
+      messages.appendChild(notification);
+      messages.scrollTop = messages.scrollHeight;
+    }
+  </script>
+</body>
+</html>
+
+
