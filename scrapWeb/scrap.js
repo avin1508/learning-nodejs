@@ -51,7 +51,7 @@ async function scrapeMeenakshiStage() {
 
         await driver.sleep(1000); 
 
-        await driver.findElement(By.css('input[id="emailId"]')).sendKeys('superAdmin@gmail.com');
+        await driver.findElement(By.css('input[id="emailId"]')).sendKeys('');
         console.log('Entered username');
 
         await driver.wait(until.elementLocated(By.css('input[id="password"]')), 30000);
