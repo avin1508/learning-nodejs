@@ -238,7 +238,6 @@ describe('GET /bomview/:orderId', () => {
 describe('POST /bomroutes/bomupdate', () => {
 
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoic3VwZXJBZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MjU5NzI4MDUsImV4cCI6MTcyNjU3NzYwNX0.5X9j1enuIVt_E5TABxYaCLt7afTgPcLQDKqvl_8IkoE";
 
 
     it('should update BOM data successfully and return a success message', async () => {
