@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../src/app');  
 const { messages } = require('../src/config');
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoic3VwZXJBZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MjYwNDQzNDMsImV4cCI6MTcyNjY0OTE0M30.TWm0kkQHvToHnJbRFV5Geqt_hqUBYHowNuZrgujd4E8";
+const token = "";
 
 describe('POST /changeStatus', () => {
     it('should change the status for a valid orderId', async () => {
@@ -238,7 +238,6 @@ describe('GET /bomview/:orderId', () => {
 describe('POST /bomroutes/bomupdate', () => {
 
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoic3VwZXJBZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MjU5NzI4MDUsImV4cCI6MTcyNjU3NzYwNX0.5X9j1enuIVt_E5TABxYaCLt7afTgPcLQDKqvl_8IkoE";
 
 
     it('should update BOM data successfully and return a success message', async () => {
