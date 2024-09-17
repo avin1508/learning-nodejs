@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "name": "John Doe",
+      "age": 25
+    },
+    {
+      "name": "Jane Smith",
+      "age": 30
+    },
+    {
+      "name": "tarun"
+    }
+  ]
+}
+Name: John Doe
+Phone Number: 123-456-7890
+Email: john.doe@example.com
+
+Name: Jane Smith
+Phone Number: 234-567-8901
+Email: jane.smith@example.com
+
+Name: Alice Johnson
+Phone Number: 345-678-9012
+Email: alice.johnson@example.com
+
+Name: Bob Brown
+Phone Number: 456-789-0123
+Email: bob.brown@example.com
+
+Name: Charlie Davis
+Phone Number: 567-890-1234
+Email: charlie.davis@example.com
+
+Name: Emily White
+Phone Number: 678-901-2345
+Email: emily.white@example.com
+
+Name: Frank Harris
+Phone Number: 789-012-3456
+Email: frank.harris@example.com
+
+Name: Grace Lee
+Phone Number: 890-123-4567
+Email: grace.lee@example.com
+
+Name: Henry Clark
+Phone Number: 901-234-5678
+Email: henry.clark@example.com
+
+Name: Isabella King
+Phone Number: 012-345-6789
+Email: isabella.king@example.com
